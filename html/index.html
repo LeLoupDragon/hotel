@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1 class="bleue">BOOKING HOTEL</h1>
+        <h4>Indiquez vos dates de réservation - Toute annulation doit se faire 48h avant</h4>
+    </header>
+    <main>
+        <nav>
+        <table class="entree" border="1">
+            <tr>
+                <td colspan="2"><img src="../image/hotel.png" class="bouton-colore"></td>
+                <td colspan="2" class="rouge">France - Etranger</td>
+            </tr>
+            <tr>
+                <td colspan="2">Lieu de séjour</td>
+                <td colspan="2"><input type="text" name="Lieu de séjour" id="sejour" placeholder="Lieu du séjour"></td>
+            </tr>
+            <tr> 
+                <td colspan="2">Arrivée <br /><input type="date" id="arr" class="date"></td>
+                <td colspan="2"> Départ <br /> <input type="date" id="dep" class="date"></td>
+            </tr>
+            <tr>
+                <td colspan="1">Adulte</td>
+                <td colspan="1"><input type="number" id="nombre_adulte" class="champs-number" value="0"></td>
+                <td><input type="image" id="plus_adulte" name="plus adulte" src="../image/plus_icon.png" alt="bouton plus" class="bouton-colore" onclick="ajouter_adulte()"></td>
+                <td><input type="image" id="moins_adulte" name="moins adulte" src="../image/minus_icon.png" alt="bouton moins" class="bouton-colore" onclick="enlever_adulte()"></td>
+            </tr>
+            <tr>
+                <td>Enfant</td>
+                <td><input type="number" id="nombre_enfant" name="Enfant" class="champs-number" value="0"></td>
+                <td><input type="image" id="plus_enfant" name="plus_enfant" src="../image/plus_icon.png" alt="bouton plus" class="bouton-colore" onclick="ajouter_enfant()"></td>
+                <td><input type="image" id="moins_enfant" name="moins enfant" src="../image/minus_icon.png" alt="bouton moins" class="bouton-colore" onclick="enlever_enfant()"></td>
+            </tr>
+            <tr>
+                <td>Chambre</td>
+                <td><input type="number" id="nombre_chambre" name="Chambre" class="champs-number" value="0"></td>
+                <td><input type="image" id="plus_chambre" name="plus chambre" src="../image/plus_icon.png" alt="bouton plus" class="bouton-colore" onclick="ajouter_chambre()"></td>
+                <td><input type="image" id="moins_chambre" name="moins chambre" src="../image/minus_icon.png" alt="bouton moins" class="bouton-colore" onclick="enlever_chambre()"></td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="submit" class="btn" value="Rechercher" id="btn_rechercher" onclick="recherche()"></td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="button" class="btn" value="Effacer" id="btn_effacer" onclick="reset()"></td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="checkbox" name="travail" id="travail"><span>Je voyage pour le travail</span></td>
+            </tr>
+            <tr>
+                <td colspan="4"><div id="age_enfants"></div></td>
+            </tr>
+        </table>   
+
+
+        <table class="resultats">
+            <tr>
+                <td class="rouge">Confirmation réservation</td>
+            </tr>
+            
+            <tr>
+                <td><p>Nombre(s) d'adulte(s) : </p></td>
+            </tr>
+            <tr>
+                <td><span id="adu"></span></td>
+            </tr>
+
+            <tr>
+                <td><p>Nombre(s) d'enfant(s) : </p></td>
+            </tr>
+            <tr>
+                <td><span id="enf"></span></td>
+            </tr>
+
+            <tr>
+                <td><p>Nombre(s) de chambre(s) : </p></td>
+            </tr>
+            <tr>
+                <td><span id="cham"></span></td>
+            </tr>
+
+            <tr>
+                <td><p>Voyage pour le travail: </p></td>
+            </tr>
+            <tr>
+                <td><span id="tra"></span></td>
+            </tr>
+        </table>
+    </nav>
+    </main>
+    <footer>
+        <h4 class="foot">Indiquez vos dates de réservation - Toute annulation doit se faire 48h avant</h4>
+    </footer>
+
+    <script>
+        function ajouter_adulte(){
+            var nombre_adulte = parseInt(document.getElementById("nombre_adulte").value);
+            document.getElementById("nombre_adulte").value = ++nombre_adulte;
+        }
+
+        function enlever_adulte(){
+            var nombre_adulte = parseInt(document.getElementById("nombre_adulte").value);
+            if (nombre_adulte > 0) {
+                document.getElementById("nombre_adulte").value = --nombre_adulte;
+            }
+        }
+
+        function ajouter_enfant(){
+            var nombre_enfant = parseInt(document.getElementById("nombre_enfant").value);
+            document.getElementById("nombre_enfant").value = ++nombre_enfant;
+            
+            var container = document.getElementById("age_enfants");
+            var newField = document.createElement("div");
+            newField.id = "enfant_" + nombre_enfant;
+            newField.innerHTML = '<label for="age_enfant_' + nombre_enfant + '">Âge de l\'enfant ' + nombre_enfant + ':</label> <input type="number" id="age_enfant_' + nombre_enfant + '" name="age_enfant_' + nombre_enfant + '" min="0" max="17">';
+            container.appendChild(newField);
+        }
+
+        function enlever_enfant(){
+            var nombre_enfant = parseInt(document.getElementById("nombre_enfant").value);
+            if (nombre_enfant > 0) {
+                var container = document.getElementById("age_enfants");
+                var fieldToRemove = document.getElementById("enfant_" + nombre_enfant);
+                container.removeChild(fieldToRemove);
+
+
+                document.getElementById("nombre_enfant").value = --nombre_enfant;
+            }
+        }
+
+        function ajouter_chambre(){
+            var nombre_chambre = parseInt(document.getElementById("nombre_chambre").value);
+            document.getElementById("nombre_chambre").value = ++nombre_chambre;
+        }
+
+        function enlever_chambre(){
+            var nombre_chambre = parseInt(document.getElementById("nombre_chambre").value);
+            if (nombre_chambre > 0) {
+                document.getElementById("nombre_chambre").value = --nombre_chambre;
+            }
+        }
+        
+        function date() {
+            var arriv = new Date(document.getElementById("arr").value);
+            var depart = new Date(document.getElementById("dep").value);
+
+            if (arriv <= depart) {
+                alert("La date de départ doit être ultérieure à la date d'arrivée.");
+                return false;
+            }
+            return true;
+        }
+
+        function reset() {
+            document.getElementById("nombre_adulte").value = 0;
+            document.getElementById("nombre_enfant").value = 0;
+            document.getElementById("nombre_chambre").value = 0;
+            document.getElementById("sejour").value = "";
+            document.getElementById("arr").value = "";
+            document.getElementById("dep").value = "";
+
+            var container = document.getElementById("age_enfants");
+            container.innerHTML = "";
+        }
+
+        function recherche() {
+            if (!date()) {
+                return;
+            }
+            var nombre_adulte = document.getElementById("nombre_adulte").value;
+            var nombre_enfant = document.getElementById("nombre_enfant").value;
+            var nombre_chambre = document.getElementById("nombre_chambre").value;
+            var voyage_travail = document.getElementById("travail").checked ? "Oui" : "Non";
+
+            document.getElementById("adu").innerText = nombre_adulte;
+            document.getElementById("enf").innerText = nombre_enfant;
+            document.getElementById("cham").innerText = nombre_chambre;
+            document.getElementById("tra").innerText = voyage_travail;
+        }
+    </script>
+</body>
+</html>

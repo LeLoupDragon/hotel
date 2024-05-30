@@ -1,0 +1,80 @@
+html {
+    background-image:url("../image/hotel_fond.jpg");
+     background-size: 90%;
+     margin-left: 0;
+     padding-left: 0;
+}
+
+header {
+    text-align: center;
+    background-color: lightblue;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+footer {
+    background-color: red;
+    text-align: center;
+    bottom: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+.bleue {
+    color: blue;
+}
+
+.jaune {
+    color: yellow;
+}
+
+.rouge {
+    color: #961d20 ;
+    font-size: 30px;
+}
+
+.entree {
+    border: solid 1px black;
+    text-align: center;
+    background-color: #dbbcf5 ;
+}
+
+.resultats{
+    background-color: #acc7ff ;
+    
+}
+
+.bouton-colore {
+    width: 3em;
+    height: auto;
+}
+
+.champs-number{
+    width: 2em;
+    text-align: right;
+}
+
+.date {
+    background-color: #c0ffc0;
+}
+
+.btn {
+    border-radius: 3em;
+    color: white;
+    background-color: blue;
+    border: 0;
+    height: 2.5em;
+    width: 18em;
+}
+
+.foot {
+    position: absolute;
+    bottom: 0;
+    height: 2em;
+    background-color: red;
+    color: yellow;
+    width: 99%;
+}
